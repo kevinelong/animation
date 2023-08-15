@@ -1,0 +1,36 @@
+<style>
+button{
+    margin: 1rem;
+    padding: 0.5rem;
+    background-color: darkblue;
+    color: goldenrod;
+    font-size: 1rem;
+    /* transition: all 300ms ease-out; */
+    transform: rotate(0deg);
+}
+button.animating{
+    /* font-size: 2rem; */
+    /* transition: all 300ms ease-out; */
+    animation: spin 300ms linear infinite;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+</style>
+<body>
+    <button id="b1">Click me!!!</button>
+    <button id="b2">Click me!!!</button>
+</body>
+<script>
+function animate(e){
+    e.target.classList.add("animating");
+    id = setTimeout(()=>{
+        e.target.classList.remove("animating");
+    }, 600)
+}
+b1.onclick = animate;
+b2.onclick = animate;
+
+</script>
