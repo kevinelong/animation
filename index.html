@@ -5,17 +5,14 @@ button{
     background-color: darkblue;
     color: goldenrod;
     font-size: 1rem;
-    /* transition: all 300ms ease-out; */
-    transform: rotate(0deg);
+
+    transition: all 50ms ease-in-out;
+
+    transform: scale(1) rotate(0deg); 
 }
 button.animating{
-    /* font-size: 2rem; */
-    /* transition: all 300ms ease-out; */
-    animation: spin 300ms linear infinite;
-}
-
-@keyframes spin {
-  100% { transform: rotate(360deg); }
+    transform: scale(0.85) rotate(-5deg); 
+    transition: all 50ms ease-in-out;
 }
 
 </style>
@@ -23,14 +20,30 @@ button.animating{
     <button id="b1">Click me!!!</button>
     <button id="b2">Click me!!!</button>
 </body>
+<script src="party.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/party-js@latest/bundle/party.min.js"></script> -->
 <script>
+
 function animate(e){
     e.target.classList.add("animating");
+setTimeout(()=>{
+
+    party.sparkles(e.target, {
+        count: party.variation.range(20, 40),
+        spread: party.variation.range(40, 40),
+        speed: party.variation.range(100, 200),
+        size: party.variation.skew(0.2, 0.5),
+        shapes: ['circle'],
+        skew: party.variation.skew(1, 11),
+        lifetime: 0.33,
+        gravity: 100,
+        color: function () { return party.Color.fromHsl(50, 100, party.random.randomRange(0, 255)); }
+    });
+
     id = setTimeout(()=>{
         e.target.classList.remove("animating");
-    }, 600)
+    }, 100);
+},0);
 }
-b1.onclick = animate;
-b2.onclick = animate;
-
+document.querySelectorAll("button").forEach(b=>b.onmousedown = animate)
 </script>
